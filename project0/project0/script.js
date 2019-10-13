@@ -10,6 +10,7 @@ const itemCountSpan = document.getElementById('item-count')
 const uncheckedCountSpan = document.getElementById('unchecked-count')
 const todoText = document.getElementById("todo-text")
 const todoButton = document.getElementById("todo-button")
+const taskList = document.getElementById("todo-list")
 
 
 function newTodo() {
@@ -22,10 +23,8 @@ function newTodo() {
   	return
   }
 
-  // Get the list object
-  let ul = document.getElementById('todo-list')
-
-  addTaskToList(ul, task.value)
+  addTaskToList(taskList, task.value)
+  updateCounter(taskList)
 
   task.value = ""
   return
@@ -50,8 +49,9 @@ function createTodoItem(taskText) {
 	return li
 }
 
-function updateCounter() {
-	
+function updateCounter(htmlList) {
+	itemCountSpan.textContent = htmlList.childElementCount.toString()
+	return
 }
 
 function addRemoveButton() {
