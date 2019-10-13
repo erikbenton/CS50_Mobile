@@ -43,6 +43,9 @@ function createTodoItem(taskText) {
 	let listText = document.createTextNode(taskText)
 	li.appendChild(listText)
 
+	// Add some class
+	li.className = "todo-task"
+
 	// Add a 'remove' button
 	li.appendChild(addRemoveButton())
 
@@ -58,6 +61,7 @@ function addRemoveButton() {
   const removeButton = document.createElement("button")
   let buttonText = document.createTextNode("X")
   removeButton.onclick = removeTaskFromList
+  removeButton.className = "remove-button"
   removeButton.appendChild(buttonText)
   return removeButton
 }
@@ -66,6 +70,7 @@ function removeTaskFromList(e) {
 	let button = e.target
 	let li = button.parentNode
 	li.remove()
+	updateCounter(taskList)
 	return
 }
 

@@ -64,3 +64,15 @@ ul {
 .todo-container:first-of-type {
   border-top: 1px solid #333;
 }
+
+.remove-button {
+  align-self: right;
+  background-color: #F00;
+  font: 0.75em "Fire Sans", sans-serif;
+}
+
+.todo-task {
+  display: inline-block;
+  font: 2.5em "Fira Sans", sans-serif;
+  width: 500px;
+}
