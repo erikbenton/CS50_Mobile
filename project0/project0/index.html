@@ -11,10 +11,27 @@
         <span>Item count: <span id="item-count">0</span></span>
         <span>Unchecked count: <span id="unchecked-count">0</span></span>
       </div>
-      <div class="center">
-        <input type="text" id="todo-text" name="name" required minlength="4" maxlength="24" size="16">
+      <div class="todo-form">
+        <span class="left-side">
+          <input type="text" id="todo-text" name="name" required minlength="4" maxlength="24" size="16">
+        
+          <span id="priority-select">
+            <span id="priority-header">Priority: </span>
+          
+            <input type="radio" id="high" name="priority" value="high" checked>
+            <label for="high">High</label>
+            
+            <input type="radio" id="medium" name="priority" value="medium">
+            <label for="medium">Medium</label>
+            
+            <input type="radio" id="low" name="priority" value="low">
+            <label for="low">Low</label>
+          </span>
+        </span>
+        <span class="right-side">
+          <button class="button center" id="todo-button">New TODO</button>
+        </span>
       </div>
-      <button class="button center" id="todo-button">New TODO</button>
       <ul id="todo-list" class="todo-list"></ul>
     </div>
     <script src="./script.js"></script>

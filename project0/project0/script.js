@@ -24,7 +24,7 @@ function newTodo() {
   }
 
   addTaskToList(taskList, task.value)
-  updateCounter(taskList)
+  updateItemCount(taskList)
 
   task.value = ""
   return
@@ -46,15 +46,50 @@ function createTodoItem(taskText) {
 	// Add some class
 	li.className = "todo-task"
 
+	// Add a Completed checkbox
+	li.appendChild(addCompletedCheckbox())
+	li.appendChild(addCompletedLabel())
+
 	// Add a 'remove' button
 	li.appendChild(addRemoveButton())
 
 	return li
 }
 
-function updateCounter(htmlList) {
+function updateItemCount(htmlList) {
 	itemCountSpan.textContent = htmlList.childElementCount.toString()
+	updateUncheckedCount()
 	return
+}
+
+function updateUncheckedCount() {
+  let checkboxes = document.getElementsByClassName("completed-checkbox")
+  let numUnchecked = 0
+  for( let i = 0; i < checkboxes.length; i++) {
+    if(!checkboxes[i].checked) {
+    	numUnchecked++
+    }
+  }
+  uncheckedCountSpan.textContent = numUnchecked.toString()
+  return
+}
+
+function addCompletedCheckbox() {
+  const completedCheckbox = document.createElement("input")
+  completedCheckbox.type = "checkbox"
+  completedCheckbox.name = "completed"
+  completedCheckbox.value = "completed"
+  completedCheckbox.onclick = updateUncheckedCount
+  completedCheckbox.className = "completed-checkbox"
+  return completedCheckbox
+}
+
+function addCompletedLabel() {
+  const completedLabel = document.createElement("label")
+  completedLabel.for = "completed"
+  let completedText = document.createTextNode("Completed")
+  completedLabel.appendChild(completedText)
+  return completedLabel
 }
 
 function addRemoveButton() {
@@ -70,7 +105,7 @@ function removeTaskFromList(e) {
 	let button = e.target
 	let li = button.parentNode
 	li.remove()
-	updateCounter(taskList)
+	updateItemCount(taskList)
 	return
 }
 
