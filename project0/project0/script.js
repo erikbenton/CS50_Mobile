@@ -38,20 +38,32 @@ function addTaskToList(htmlList, taskText) {
 function createTodoItem(taskText) {
 	// First create the list element
 	const li = document.createElement("li")
-
-	// Add the text to it
-	let listText = document.createTextNode(taskText)
-	li.appendChild(listText)
-
+	
 	// Add some class
 	li.className = "todo-task"
 
+	// Create a "left-side" for the text
+	const divLeft = document.createElement("div")
+	divLeft.className = "left-side"
+
+	// Add the text to it
+	let divText = document.createTextNode(taskText)
+	divLeft.appendChild(divText)
+
+	li.appendChild(divLeft)
+
+	// Create a "right-side" for the text
+	const divRight = document.createElement("div")
+	divRight.className = "right-side"
+
 	// Add a Completed checkbox
-	li.appendChild(addCompletedCheckbox())
-	li.appendChild(addCompletedLabel())
+	divRight.appendChild(addCompletedCheckbox())
+	divRight.appendChild(addCompletedLabel())
 
 	// Add a 'remove' button
-	li.appendChild(addRemoveButton())
+	divRight.appendChild(addRemoveButton())
+
+	li.appendChild(divRight)
 
 	return li
 }
@@ -87,7 +99,8 @@ function addCompletedCheckbox() {
 function addCompletedLabel() {
   const completedLabel = document.createElement("label")
   completedLabel.for = "completed"
-  let completedText = document.createTextNode("Completed")
+  completedLabel.className = "completed-label"
+  let completedText = document.createTextNode("Done")
   completedLabel.appendChild(completedText)
   return completedLabel
 }
@@ -103,7 +116,7 @@ function addRemoveButton() {
 
 function removeTaskFromList(e) {
 	let button = e.target
-	let li = button.parentNode
+	let li = button.closest("li")
 	li.remove()
 	updateItemCount(taskList)
 	return

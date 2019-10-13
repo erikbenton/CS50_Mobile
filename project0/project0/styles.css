@@ -42,7 +42,8 @@ ul {
 }
 
 .todo-list {
-  flex: 1 1 0;
+  /*flex: 1 1 0;*/
+  display: inline-block;
   margin-top: 20px;
   padding: 20px;
   overflow-y: auto;
@@ -69,22 +70,44 @@ ul {
   align-self: right;
   background-color: #F00;
   font: 0.75em "Fire Sans", sans-serif;
+  display:inline;
 }
 
 .todo-task {
+  clear: both;
   display: inline-block;
   font: 2.5em "Fira Sans", sans-serif;
-  width: 500px;
+  width: 600px;
+}
+
+.todo-task:after {
+  clear: both;
+}
+
+.completed-label {
+  font: 0.75em "Fira Sans", sans-serif;
+  display: inline;
+}
+
+.completed-checkbox {
+  height: 1.5em;
+  width: 1.5em;
+  display: inline;
 }
 
 .todo-form {
   display: inline-block;
+  width: 100%;
 }
 
 .left-side {
-  align-content: left;
+  /*display: inline-block;*/
+  float: left;
+  width: 75%;
 }
 
 .right-side {
-  text-align: right;
+  /*display: inline-block;*/
+  float: right;
+  width: 25%;
 }
