@@ -9,8 +9,11 @@ const list = document.getElementById('todo-list')
 const itemCountSpan = document.getElementById('item-count')
 const uncheckedCountSpan = document.getElementById('unchecked-count')
 const todoText = document.getElementById("todo-text")
+const todoButton = document.getElementById("todo-button")
+
 
 function newTodo() {
+
   let task = document.getElementById("todo-text")
 
   // Check if there is actually any text in the input
@@ -29,14 +32,40 @@ function newTodo() {
 }
 
 function addTaskToList(htmlList, taskText) {
-  // Create a node for the list with the text from the prompt
-  let li = document.createElement("li")
-
-  // Append it to the list node and list
-  li.appendChild(document.createTextNode(taskText))
-  htmlList.appendChild(li)
+  htmlList.appendChild(createTodoItem(taskText))
   return
 }
+
+function createTodoItem(taskText) {
+	// First create the list element
+	const li = document.createElement("li")
+
+	// Add the text to it
+	let listText = document.createTextNode(taskText)
+	li.appendChild(listText)
+
+	// Add a 'remove' button
+	li.appendChild(addRemoveButton())
+
+	return li
+}
+
+function updateCounter() {
+	
+}
+
+function addRemoveButton() {
+  const removeButton = document.createElement("button")
+  let buttonText = document.createTextNode("X")
+  removeButton.appendChild(buttonText)
+  return removeButton
+}
+
+function removeTaskFromList() {
+
+}
+
+todoButton.addEventListener('click', newTodo)
 
 todoText.addEventListener('keydown', function onEvent(e) {
 	if(e.keyCode === 13) {
