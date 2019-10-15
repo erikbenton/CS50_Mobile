@@ -11,12 +11,9 @@ const uncheckedCountSpan = document.getElementById('unchecked-count')
 const todoText = document.getElementById("todo-text")
 const todoButton = document.getElementById("todo-button")
 const taskList = document.getElementById("todo-list")
-
+const task = document.getElementById("todo-text")
 
 function newTodo() {
-
-  let task = document.getElementById("todo-text")
-  let priority = document.querySelector('input[name="priority"]:checked');
 
   // Check if there is actually any text in the input
   if(task.value.length < 1) {
@@ -24,15 +21,27 @@ function newTodo() {
   	return
   }
 
-  addTaskToList(taskList, task.value, priority.value)
-  updateItemCount(taskList)
+  // Get the current choice for priority
+  let priority = document.querySelector('input[name="priority"]:checked')
 
-  task.value = ""
+  // Add it to the list
+  addTaskToList(taskList, task.value, priority.value)
+
+  // Reset the form
+  resetTodoForm()
+
+  return
+}
+
+function resetTodoForm() {
+  document.getElementById("todo-text").value = ""
+  document.getElementById("priority-high").checked = true
   return
 }
 
 function addTaskToList(htmlList, taskText, priorityLevel) {
   htmlList.appendChild(createTodoItem(taskText, priorityLevel))
+  updateItemCount(taskList)
   return
 }
 
@@ -93,7 +102,7 @@ function addCompletedCheckbox() {
   completedCheckbox.type = "checkbox"
   completedCheckbox.name = "completed"
   completedCheckbox.value = "completed"
-  completedCheckbox.onclick = updateUncheckedCount
+  completedCheckbox.onclick = markAsCompleted
   completedCheckbox.className = "completed-checkbox"
   return completedCheckbox
 }
@@ -105,6 +114,20 @@ function addCompletedLabel() {
   let completedText = document.createTextNode("Done")
   completedLabel.appendChild(completedText)
   return completedLabel
+}
+
+function markAsCompleted(e) {
+  let checkbox = e.target
+  let li = checkbox.closest("li")
+  let liList = li.classList
+  if(checkbox.checked) {
+    liList.add("completed")
+  }
+  else {
+    liList.remove("completed")
+  }
+  updateUncheckedCount(taskList)
+  return
 }
 
 function addRemoveButton() {
