@@ -16,6 +16,7 @@ const taskList = document.getElementById("todo-list")
 function newTodo() {
 
   let task = document.getElementById("todo-text")
+  let priority = document.querySelector('input[name="priority"]:checked');
 
   // Check if there is actually any text in the input
   if(task.value.length < 1) {
@@ -23,24 +24,25 @@ function newTodo() {
   	return
   }
 
-  addTaskToList(taskList, task.value)
+  addTaskToList(taskList, task.value, priority.value)
   updateItemCount(taskList)
 
   task.value = ""
   return
 }
 
-function addTaskToList(htmlList, taskText) {
-  htmlList.appendChild(createTodoItem(taskText))
+function addTaskToList(htmlList, taskText, priorityLevel) {
+  htmlList.appendChild(createTodoItem(taskText, priorityLevel))
   return
 }
 
-function createTodoItem(taskText) {
+function createTodoItem(taskText, priorityLevel) {
 	// First create the list element
 	const li = document.createElement("li")
 	
 	// Add some class
 	li.className = "todo-task"
+  li.classList.add(priorityLevel)
 
 	// Create a "left-side" for the text
 	const divLeft = document.createElement("div")

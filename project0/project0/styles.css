@@ -111,3 +111,15 @@ ul {
   float: right;
   width: 25%;
 }
+
+.low-priority {
+  background-color: #FFFF66
+}
+
+.medium-priority {
+  background-color: #FFA07A
+}
+
+.high-priority {
+  background-color: #CD5C5C
+}
